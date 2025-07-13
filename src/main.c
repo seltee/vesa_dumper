@@ -7,9 +7,9 @@
 
 char buffer[1024];
 ModeHeader modeHeader;
-VesaMainInfo vesaMainInfo;
+VESAMainInfo vesaMainInfo;
 MainHeader mainHeader;
-VesaModeInfo vesaModeInfo;
+VESAModeInfo vesaModeInfo;
 
 void writeModeInfo(FILE *fileTXT, FILE *fileBIN, int mode)
 {
@@ -49,7 +49,7 @@ void writeModeInfo(FILE *fileTXT, FILE *fileBIN, int mode)
             modeHeader.mode = mode;
             fwrite(&modeHeader, sizeof(ModeHeader), 1, fileBIN);
 
-            memset(&vesaModeInfo, 0, sizeof(VesaModeInfo));
+            memset(&vesaModeInfo, 0, sizeof(VESAModeInfo));
             vesaModeInfo.modeAttributes = vesaVbeModeInfo->ModeAttributes;
             vesaModeInfo.winAAttributes = vesaVbeModeInfo->WinAAttributes;
             vesaModeInfo.winBAttributes = vesaVbeModeInfo->WinBAttributes;
@@ -81,7 +81,7 @@ void writeModeInfo(FILE *fileTXT, FILE *fileBIN, int mode)
             vesaModeInfo.offScreenMemOffset = vesaVbeModeInfo->OffScreenMemOffset;
             vesaModeInfo.offScreenMemSize = vesaVbeModeInfo->OffScreenMemSize;
             vesaModeInfo.usingPalette = (mode & 0x10) ? 0 : 1;
-            fwrite(&vesaModeInfo, sizeof(VesaModeInfo), 1, fileBIN);
+            fwrite(&vesaModeInfo, sizeof(VESAModeInfo), 1, fileBIN);
         }
     }
 }
@@ -109,19 +109,19 @@ int main(void)
     // Header
     memcpy(mainHeader.signature, "VSIF", 4);
     mainHeader.version = 1;
-    mainHeader.sizeOfMainBlock = sizeof(VesaMainInfo);
-    mainHeader.sizeOfModeBlock = sizeof(VesaModeInfo);
+    mainHeader.sizeOfMainBlock = sizeof(VESAMainInfo);
+    mainHeader.sizeOfModeBlock = sizeof(VESAModeInfo);
     fwrite(&mainHeader, sizeof(MainHeader), 1, fileBIN);
 
-    // Vesa main information
+    // VESA main information
     vesaMainInfo.VESAVersion = (major << 8) | minor;
     vesaMainInfo.totalMemory = vesaVbeInfo->TotalMemory;
     memcpy(vesaMainInfo.capabilities, vesaVbeInfo->Capabilities, 4);
-    fwrite(&vesaMainInfo, sizeof(VesaMainInfo), 1, fileBIN);
+    fwrite(&vesaMainInfo, sizeof(VESAMainInfo), 1, fileBIN);
 
     sprintf(buffer, "=Main info=\n");
     fputs(buffer, fileTXT);
-    sprintf(buffer, "Vesa Version %04xh\n", (major << 8) | minor);
+    sprintf(buffer, "VESA Version %04xh\n", (major << 8) | minor);
     fputs(buffer, fileTXT);
     sprintf(buffer, "Total VRAM %i\n", vesaVbeInfo->TotalMemory);
     fputs(buffer, fileTXT);

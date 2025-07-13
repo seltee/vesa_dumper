@@ -18,7 +18,7 @@ typedef struct
     unsigned long OemProductRevPtr;
     char Reserved[222];
     char OemData[256];
-} VesaVbeInfoBlock;
+} VESAVbeInfoBlock;
 
 typedef struct VbeModeInfoBlock
 {
@@ -59,15 +59,15 @@ typedef struct VbeModeInfoBlock
     unsigned short OffScreenMemSize;  // Size of offscreen memory in KB
 
     unsigned char Reserved2[206]; // Reserved, must be zero
-} VesaVbeModeInfoBlock;
+} VESAVbeModeInfoBlock;
 
-extern VesaVbeInfoBlock far *vesaVbeInfo;
-extern VesaVbeModeInfoBlock far *vesaVbeModeInfo;
+extern VESAVbeInfoBlock far *vesaVbeInfo;
+extern VESAVbeModeInfoBlock far *vesaVbeModeInfo;
 extern int vbeModeInfoBlock;
 
 void vesaUpdateVBEInfo();
 void vesaUpdateVBEModeInfo(int mode);
-int vesaGetVesaVersion();
+int vesaGetVESAVersion();
 int vesaIsLinearBufferAvailable(int mode);
 unsigned char *vesaGetLinearBufferAdress(int mode);
 

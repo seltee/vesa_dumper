@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 
-VesaVbeInfoBlock far *vesaVbeInfo = 0;
-VesaVbeModeInfoBlock far *vesaVbeModeInfo = 0;
+VESAVbeInfoBlock far *vesaVbeInfo = 0;
+VESAVbeModeInfoBlock far *vesaVbeModeInfo = 0;
 unsigned int vesaModeSegment = 0;
 int vbeModeInfoBlock = 0;
 union REGS regs;
@@ -17,8 +17,8 @@ void vesaUpdateVBEInfo()
         memset(&sregs, 0, sizeof(struct SREGS));
 
         unsigned int segment;
-        dosMemAlloc(sizeof(VesaVbeInfoBlock), &segment);
-        vesaVbeInfo = (VesaVbeInfoBlock far *)MK_FP(segment, 0);
+        dosMemAlloc(sizeof(VESAVbeInfoBlock), &segment);
+        vesaVbeInfo = (VESAVbeInfoBlock far *)MK_FP(segment, 0);
 
         if (!vesaVbeInfo)
         {
@@ -27,7 +27,7 @@ void vesaUpdateVBEInfo()
         }
 
         // Initialize block
-        _fmemset(vesaVbeInfo, 0, sizeof(VesaVbeInfoBlock));
+        _fmemset(vesaVbeInfo, 0, sizeof(VESAVbeInfoBlock));
         _fmemcpy(vesaVbeInfo->VESASignature, "VBE2", 4);
 
         regs.w.ax = 0x4F00;
@@ -57,8 +57,8 @@ void vesaUpdateVBEModeInfo(int mode)
             vesaModeSegment = 0;
         }
 
-        dosMemAlloc(sizeof(VesaVbeModeInfoBlock), &vesaModeSegment);
-        vesaVbeModeInfo = (VesaVbeModeInfoBlock far *)MK_FP(vesaModeSegment, 0);
+        dosMemAlloc(sizeof(VESAVbeModeInfoBlock), &vesaModeSegment);
+        vesaVbeModeInfo = (VESAVbeModeInfoBlock far *)MK_FP(vesaModeSegment, 0);
 
         if (!vesaVbeModeInfo)
         {
@@ -67,7 +67,7 @@ void vesaUpdateVBEModeInfo(int mode)
         }
 
         // Initialize block
-        _fmemset(vesaVbeModeInfo, 0, sizeof(VesaVbeModeInfoBlock));
+        _fmemset(vesaVbeModeInfo, 0, sizeof(VESAVbeModeInfoBlock));
 
         regs.w.ax = 0x4F01;
         regs.w.cx = mode;

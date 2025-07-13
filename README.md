@@ -20,21 +20,21 @@ int result = system("VESAINFO.COM");
 VESAINFO.BIN is binary file with the following structure:
 
 - **MainHeader**
-- **VesaMainInfo**
+- **VESAMainInfo**
 - Multiple:
     - **ModeHeader**
-    - **VesaModeInfo**
+    - **VESAModeInfo**
 - Ending with **ModeHeader** where mode set to 0
 
 The structure definitions can be found in this repository at: *src/headers.h*
 
 # Notes on Data
 
-**VesaMainInfo** contains general VESA data including the VESA version. Version of 0x0200 or higher is required for linear framebuffer support.
+**VESAMainInfo** contains general VESA data including the VESA version. Version of 0x0200 or higher is required for linear framebuffer support.
 
 Each **ModeHeader** contains the video mode number (e.g., 0x101, 0x4101, etc.)
 
-Each **VesaModeInfo** contains parameters such as resolution, color depth, mode attributes, and memory layout.
+Each **VESAModeInfo** contains parameters such as resolution, color depth, mode attributes, and memory layout.
 
 # Why it's needed
 

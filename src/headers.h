@@ -9,19 +9,19 @@ typedef struct MainHeader
     unsigned long sizeOfModeBlock;
 } MainHeader;
 
-typedef struct VesaMainInfo
+typedef struct VESAMainInfo
 {
-    unsigned short VESAVersion; // 0x200 for Vesa 2.0
+    unsigned short VESAVersion; // 0x200 for VESA 2.0
     unsigned short totalMemory;
     unsigned char capabilities[4];
-} VesaMainInfo;
+} VESAMainInfo;
 
 typedef struct ModeHeader
 {
     unsigned long mode;
 } ModeHeader;
 
-typedef struct VesaModeInfo
+typedef struct VESAModeInfo
 {
     unsigned short modeAttributes; // Mode attributes
     unsigned char winAAttributes;  // Window A attributes
@@ -66,6 +66,6 @@ typedef struct VesaModeInfo
 
     unsigned short offScreenMemSize; // Size of offscreen memory in KB
     unsigned short usingPalette;     // Is using palette
-} VesaModeInfo;
+} VESAModeInfo;
 
 #endif
