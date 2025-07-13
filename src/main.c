@@ -116,7 +116,10 @@ int main(void)
     // VESA main information
     vesaMainInfo.VESAVersion = (major << 8) | minor;
     vesaMainInfo.totalMemory = vesaVbeInfo->TotalMemory;
-    memcpy(vesaMainInfo.capabilities, vesaVbeInfo->Capabilities, 4);
+    vesaMainInfo.capabilities[0] = vesaVbeInfo->Capabilities[0];
+    vesaMainInfo.capabilities[1] = vesaVbeInfo->Capabilities[1];
+    vesaMainInfo.capabilities[2] = vesaVbeInfo->Capabilities[2];
+    vesaMainInfo.capabilities[3] = vesaVbeInfo->Capabilities[3];
     fwrite(&vesaMainInfo, sizeof(VESAMainInfo), 1, fileBIN);
 
     sprintf(buffer, "=Main info=\n");

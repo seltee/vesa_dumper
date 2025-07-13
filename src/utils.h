@@ -4,6 +4,7 @@
 #include <i86.h>
 #include <dos.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 extern union REGS utilsRegs;
 extern struct SREGS utilsSRegs;

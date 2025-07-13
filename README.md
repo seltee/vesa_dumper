@@ -17,7 +17,7 @@ int result = system("VESAINFO.COM");
 
 # Format
 
-VESAINFO.BIN is binary file with the following structure:
+**VESAINFO.BIN** is binary file with the following structure:
 
 - **MainHeader**
 - **VESAMainInfo**
